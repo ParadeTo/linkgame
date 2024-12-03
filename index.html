@@ -13,7 +13,6 @@
 			height: 320px;
 			left: 50%;
 			transform: translateX(-50%);
-			top: 120px;
 		}
 
 		.lucky-draw-item {
@@ -128,7 +127,7 @@
 
 		#photos {
 			width: 600px;
-			height: 600px;
+			height: 700px;
 			position: relative;
 			display: flex;
 			flex-direction: column;
@@ -152,7 +151,7 @@
 			background-position: center;
 			background-size: contain;
 			background-repeat: no-repeat;
-			border: 1px solid grey;
+			border: 1px solid #283593;
 		}
 		#photos span img {
 			width: 20px;
@@ -213,8 +212,11 @@
 		<!-- 抽奖结果 -->
 		<div class="lucky-draw-results">
 			<img src="../luckImg/aiHuanZhi.jpg" alt="" class="ballon">
-			<p class="">中奖啦！！请XXX同学
-				</br>起立问答问题</p>
+			<!-- <p class="">中奖啦！！请XXX同学
+				</br>起立问答问题</p> -->
+			</br>
+			</br>
+		</br>
 			<input type="button" value="确认">
 		</div>
 		<input type="button" value="抽奖" id="btn">
@@ -235,15 +237,32 @@
 		let btn = document.querySelector('#btn');
 		let luckyResult = document.querySelector('.lucky-draw-results'); // 中奖结果
 		let dataObject = [
-			{ "name": "1", "imgSrc": "./images/bg.png", "weight": 2 },
-			{ "name": "2", "imgSrc": "./images/gamebg.png", "weight": 4 },
-			{ "name": "3", "imgSrc": "./images/webpack_rust.png", "weight": 2 },
-			{ "name": "4", "imgSrc": "./images/webpack_rust.png", "weight": 2 },
-			// { "name": "4", "imgSrc": "./images/gamebg.png", "weight": 4 },
-			// { "name": "5", "imgSrc": "./images/bg.png", "weight": 3 },
-			// { "name": "6", "imgSrc": "./images/gamebg.png", "weight": 4 },
-			// { "name": "7", "imgSrc": "./images/bg.png", "weight": 4 },
-			// { "name": "8", "imgSrc": "./images/gamebg.png", "weight": 4 },
+			{ "name": "1", "imgSrc": "./photos/1.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/2.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/3.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/4.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/5.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/6.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/7.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/8.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/9.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/10.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/11.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/12.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/13.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/14.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/15.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/16.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/17.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/18.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/19.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/20.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/21.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/22.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/23.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/24.jpg", "weight": 2 },
+			{ "name": "1", "imgSrc": "./photos/25.jpg", "weight": 2 },
+
 		];
 
 
@@ -255,9 +274,9 @@
 					let item = $("<div class='lucky-draw-item'" +
 						" data-index='" + i + "'></div>");
 					let img = $("<img src='" + dataObject[i].imgSrc + "'>");
-					let pName = $("<p class=\"lucky-draw-name\">" + dataObject[i].name + "</p>");
+					// let pName = $("<p class=\"lucky-draw-name\">" + dataObject[i].name + "</p>");
 					$(item).append(img);
-					$(item).append(pName);
+					// $(item).append(pName);
 					$(wrap).append(item);
 				}
 			}
@@ -292,6 +311,7 @@
 			luckyElementWrapper.style.left = luckyElementWrapper.offsetLeft + iSpeed + "px";
 			let index = Math.abs(parseInt(luckyElementWrapper.style.left) / 200);
 			console.log(index);
+			timer = setTimeout(fnMove, 20)
 		}
 
 		function showResult() {
@@ -324,7 +344,7 @@
 				console.log("dataObject",dataObject);
 				$(luckyResult).find("img").attr("src", dataObject[index].imgSrc);
 				let text = dataObject[index].name
-				$(luckyResult).find("p").html(text);
+				// $(luckyResult).find("p").html('');
 				$(luckyResult).slideDown();
 			}, 100);
 		}
@@ -335,12 +355,12 @@
 		$(btn).click(function () {
 			if (flag) {
 				$(luckyResult).slideUp();
-				timer = setInterval(fnMove, 20);
+				timer = setTimeout(fnMove, 20);
 				$(this).val("停止")
 				flag = false;
 			} else {
 				showResult();
-				clearInterval(timer);
+				clearTimeout(timer);
 				$(this).val("开始")
 				flag = true;
 			}
