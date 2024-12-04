@@ -39,7 +39,7 @@
 			width: 100px;
 			height: 25px;
 			background: beige;
-			bottom: 10px;
+			bottom: 30px;
 			left: calc(50% - 50px);
 		}
 
@@ -193,13 +193,13 @@
 			<ul id="imageContainer">
 
 			</ul>
-			<p>领奖台</p>
+			<p id="podium">领奖台</p>
 		</div>
 	</div>
 	
 
 	<!-- 外层容器 -->
-	<div class="lucky-draw">
+	<div class="lucky-draw" id="luckyDraw">
 		<!--    &lt;!&ndash; 中间标识箭头 &ndash;&gt;-->
 		<!--    <div class="lucky-draw-line"></div>-->
 		<!--  抽奖元素容器通过 -left 移动 -->
@@ -229,6 +229,7 @@
 
 	<script>
 		const $photos = $('#imageContainer')
+		const $podium = $('#podium')
 		let random;              // 随机数
 		let perWidth = 200;     // 一张图片的宽度
 		let luckyDrawWrapper = document.querySelector('.lucky-draw'); // 最外层容器
@@ -239,29 +240,29 @@
 		let dataObject = [
 			{ "name": "1", "imgSrc": "./photos/1.jpg", "weight": 2 },
 			{ "name": "1", "imgSrc": "./photos/2.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/3.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/4.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/5.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/6.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/7.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/8.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/9.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/10.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/11.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/12.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/13.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/14.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/15.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/16.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/17.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/18.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/19.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/20.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/21.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/22.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/23.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/24.jpg", "weight": 2 },
-			{ "name": "1", "imgSrc": "./photos/25.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/3.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/4.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/5.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/6.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/7.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/8.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/9.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/10.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/11.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/12.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/13.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/14.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/15.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/16.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/17.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/18.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/19.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/20.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/21.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/22.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/23.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/24.jpg", "weight": 2 },
+			// { "name": "1", "imgSrc": "./photos/25.jpg", "weight": 2 },
 
 		];
 
@@ -372,12 +373,19 @@
 			$(".lucky-draw-results").slideUp();
 			if(dataObject.every(data => data.skip)) {
 				$(btn).prop('disabled', true);
+				$('#luckyDraw').hide()
 			}
 			const $photo = $(`<span style="background-image: url('${dataObject[index].imgSrc}')">
 				<img src="./images/flower.jpg" alt="">
 			</span>`)
 			
 			$photos.prepend($photo)
+		})
+
+		$podium.click(() => {
+			if(dataObject.every(data => data.skip)) {
+				window.open('https://nianbroken.github.io/Firework_Simulator/', '__blank')
+			}
 		})
 
 		// 初始化设置
